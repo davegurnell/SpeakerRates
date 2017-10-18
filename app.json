@@ -1,6 +1,11 @@
 {
   "expo": {
+    "name": "SpeakerRates",
+    "slug": "speakerrates",
     "sdkVersion": "21.0.0",
-    "orientation": "landscape"
+    "orientation": "landscape",
+    "privacy": "public",
+    "description": "Talk rating application for use at conferences.",
+    "primaryColor": "#000000"
   }
 }

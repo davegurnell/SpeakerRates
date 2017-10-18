@@ -39,7 +39,7 @@ export default class App extends React.Component {
         }
 
         const menu = (
-          <View style={[ styles.buttonContainer, orientationStyle ]}>
+          <View style={[styles.buttonContainer, orientationStyle]}>
             <View style={[styles.button, styles.happyScore]}><Text style={styles.label}>{happy}</Text></View>
             <View style={[styles.button, styles.neutralScore]}><Text style={styles.label}>{neutral}</Text></View>
             <View style={[styles.button, styles.unhappyScore]}><Text style={styles.label}>{unhappy}</Text></View>
