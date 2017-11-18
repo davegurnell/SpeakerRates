@@ -1,9 +1,11 @@
+import { debounce } from 'lodash'
 import React from 'react'
-import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import WithDimensions from './WithDimensions'
 import SideMenu from 'react-native-side-menu'
 
 const pressRetentionOffset = { top: 500, bottom: 500, left: 500, right: 500 }
+const pressDebounceMillis  = 200
 
 const Button = ({ style, onPress, label, labelStyle }) =>
   <TouchableOpacity style={[ styles.button, style ]} onPress={onPress} pressRetentionOffset={pressRetentionOffset}>
@@ -13,20 +15,27 @@ const Button = ({ style, onPress, label, labelStyle }) =>
 export default class App extends React.Component {
   state = { happy: 0, neutral: 0, unhappy: 0 }
 
-  onPressHappy = () => {
+  onPressHappy = debounce(() => {
     this.setState({ ...this.state, happy: this.state.happy + 1 })
-  }
+  }, pressDebounceMillis)
 
-  onPressNeutral = () => {
+  onPressNeutral = debounce(() => {
     this.setState({ ...this.state, neutral: this.state.neutral + 1 })
-  }
+  }, pressDebounceMillis)
 
-  onPressUnhappy = () => {
+  onPressUnhappy = debounce(() => {
     this.setState({ ...this.state, unhappy: this.state.unhappy + 1 })
-  }
+  }, pressDebounceMillis)
 
   onPressReset = () => {
-    this.setState({ ...this.state, happy: 0, neutral: 0, unhappy: 0 })
+    Alert.alert(
+      'Are you sure?',
+      'Are you sure you want to reset the counters?',
+      [
+        { text: 'No',  onPress: () => {} },
+        { text: 'Yes', onPress: () => this.setState({ ...this.state, happy: 0, neutral: 0, unhappy: 0 }) }
+      ]
+    )
   }
 
   render() {
